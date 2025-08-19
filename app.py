@@ -1,427 +1,60 @@
-{
- "cells": [
-  {
-   "cell_type": "code",
-   "execution_count": 2,
-   "id": "fcfbe605-fd51-4cee-af1d-fb3d19ee6db4",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Collecting streamlit\n",
-      "  Downloading streamlit-1.48.1-py3-none-any.whl.metadata (9.5 kB)\n",
-      "Collecting altair!=5.4.0,!=5.4.1,<6,>=4.0 (from streamlit)\n",
-      "  Using cached altair-5.5.0-py3-none-any.whl.metadata (11 kB)\n",
-      "Collecting blinker<2,>=1.5.0 (from streamlit)\n",
-      "  Using cached blinker-1.9.0-py3-none-any.whl.metadata (1.6 kB)\n",
-      "Collecting cachetools<7,>=4.0 (from streamlit)\n",
-      "  Downloading cachetools-6.1.0-py3-none-any.whl.metadata (5.4 kB)\n",
-      "Collecting click<9,>=7.0 (from streamlit)\n",
-      "  Downloading click-8.2.1-py3-none-any.whl.metadata (2.5 kB)\n",
-      "Requirement already satisfied: numpy<3,>=1.23 in c:\\users\\anwesa bharasa\\appdata\\local\\programs\\python\\python311\\lib\\site-packages (from streamlit) (2.1.3)\n",
-      "Requirement already satisfied: packaging<26,>=20 in c:\\users\\anwesa bharasa\\appdata\\roaming\\python\\python311\\site-packages (from streamlit) (25.0)\n",
-      "Requirement already satisfied: pandas<3,>=1.4.0 in c:\\users\\anwesa bharasa\\appdata\\local\\programs\\python\\python311\\lib\\site-packages (from streamlit) (2.3.1)\n",
-      "Requirement already satisfied: pillow<12,>=7.1.0 in c:\\users\\anwesa bharasa\\appdata\\local\\programs\\python\\python311\\lib\\site-packages (from streamlit) (11.3.0)\n",
-      "Requirement already satisfied: protobuf<7,>=3.20 in c:\\users\\anwesa bharasa\\appdata\\local\\programs\\python\\python311\\lib\\site-packages (from streamlit) (5.29.5)\n",
-      "Collecting pyarrow>=7.0 (from streamlit)\n",
-      "  Downloading pyarrow-21.0.0-cp311-cp311-win_amd64.whl.metadata (3.4 kB)\n",
-      "Requirement already satisfied: requests<3,>=2.27 in c:\\users\\anwesa bharasa\\appdata\\local\\programs\\python\\python311\\lib\\site-packages (from streamlit) (2.32.4)\n",
-      "Collecting tenacity<10,>=8.1.0 (from streamlit)\n",
-      "  Downloading tenacity-9.1.2-py3-none-any.whl.metadata (1.2 kB)\n",
-      "Collecting toml<2,>=0.10.1 (from streamlit)\n",
-      "  Using cached toml-0.10.2-py2.py3-none-any.whl.metadata (7.1 kB)\n",
-      "Requirement already satisfied: typing-extensions<5,>=4.4.0 in c:\\users\\anwesa bharasa\\appdata\\roaming\\python\\python311\\site-packages (from streamlit) (4.14.1)\n",
-      "Collecting watchdog<7,>=2.1.5 (from streamlit)\n",
-      "  Using cached watchdog-6.0.0-py3-none-win_amd64.whl.metadata (44 kB)\n",
-      "Collecting gitpython!=3.1.19,<4,>=3.0.7 (from streamlit)\n",
-      "  Downloading gitpython-3.1.45-py3-none-any.whl.metadata (13 kB)\n",
-      "Collecting pydeck<1,>=0.8.0b4 (from streamlit)\n",
-      "  Using cached pydeck-0.9.1-py2.py3-none-any.whl.metadata (4.1 kB)\n",
-      "Requirement already satisfied: tornado!=6.5.0,<7,>=6.0.3 in c:\\users\\anwesa bharasa\\appdata\\roaming\\python\\python311\\site-packages (from streamlit) (6.5.1)\n",
-      "Requirement already satisfied: jinja2 in c:\\users\\anwesa bharasa\\appdata\\local\\programs\\python\\python311\\lib\\site-packages (from altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit) (3.1.6)\n",
-      "Requirement already satisfied: jsonschema>=3.0 in c:\\users\\anwesa bharasa\\appdata\\local\\programs\\python\\python311\\lib\\site-packages (from altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit) (4.24.0)\n",
-      "Collecting narwhals>=1.14.2 (from altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit)\n",
-      "  Downloading narwhals-2.1.2-py3-none-any.whl.metadata (11 kB)\n",
-      "Requirement already satisfied: colorama in c:\\users\\anwesa bharasa\\appdata\\roaming\\python\\python311\\site-packages (from click<9,>=7.0->streamlit) (0.4.6)\n",
-      "Collecting gitdb<5,>=4.0.1 (from gitpython!=3.1.19,<4,>=3.0.7->streamlit)\n",
-      "  Using cached gitdb-4.0.12-py3-none-any.whl.metadata (1.2 kB)\n",
-      "Collecting smmap<6,>=3.0.1 (from gitdb<5,>=4.0.1->gitpython!=3.1.19,<4,>=3.0.7->streamlit)\n",
-      "  Using cached smmap-5.0.2-py3-none-any.whl.metadata (4.3 kB)\n",
-      "Requirement already satisfied: python-dateutil>=2.8.2 in c:\\users\\anwesa bharasa\\appdata\\roaming\\python\\python311\\site-packages (from pandas<3,>=1.4.0->streamlit) (2.9.0.post0)\n",
-      "Requirement already satisfied: pytz>=2020.1 in c:\\users\\anwesa bharasa\\appdata\\local\\programs\\python\\python311\\lib\\site-packages (from pandas<3,>=1.4.0->streamlit) (2025.2)\n",
-      "Requirement already satisfied: tzdata>=2022.7 in c:\\users\\anwesa bharasa\\appdata\\local\\programs\\python\\python311\\lib\\site-packages (from pandas<3,>=1.4.0->streamlit) (2025.2)\n",
-      "Requirement already satisfied: charset_normalizer<4,>=2 in c:\\users\\anwesa bharasa\\appdata\\local\\programs\\python\\python311\\lib\\site-packages (from requests<3,>=2.27->streamlit) (3.4.2)\n",
-      "Requirement already satisfied: idna<4,>=2.5 in c:\\users\\anwesa bharasa\\appdata\\local\\programs\\python\\python311\\lib\\site-packages (from requests<3,>=2.27->streamlit) (3.10)\n",
-      "Requirement already satisfied: urllib3<3,>=1.21.1 in c:\\users\\anwesa bharasa\\appdata\\local\\programs\\python\\python311\\lib\\site-packages (from requests<3,>=2.27->streamlit) (2.5.0)\n",
-      "Requirement already satisfied: certifi>=2017.4.17 in c:\\users\\anwesa bharasa\\appdata\\local\\programs\\python\\python311\\lib\\site-packages (from requests<3,>=2.27->streamlit) (2025.7.9)\n",
-      "Requirement already satisfied: MarkupSafe>=2.0 in c:\\users\\anwesa bharasa\\appdata\\local\\programs\\python\\python311\\lib\\site-packages (from jinja2->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit) (3.0.2)\n",
-      "Requirement already satisfied: attrs>=22.2.0 in c:\\users\\anwesa bharasa\\appdata\\local\\programs\\python\\python311\\lib\\site-packages (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit) (25.3.0)\n",
-      "Requirement already satisfied: jsonschema-specifications>=2023.03.6 in c:\\users\\anwesa bharasa\\appdata\\local\\programs\\python\\python311\\lib\\site-packages (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit) (2025.4.1)\n",
-      "Requirement already satisfied: referencing>=0.28.4 in c:\\users\\anwesa bharasa\\appdata\\local\\programs\\python\\python311\\lib\\site-packages (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit) (0.36.2)\n",
-      "Requirement already satisfied: rpds-py>=0.7.1 in c:\\users\\anwesa bharasa\\appdata\\local\\programs\\python\\python311\\lib\\site-packages (from jsonschema>=3.0->altair!=5.4.0,!=5.4.1,<6,>=4.0->streamlit) (0.26.0)\n",
-      "Requirement already satisfied: six>=1.5 in c:\\users\\anwesa bharasa\\appdata\\roaming\\python\\python311\\site-packages (from python-dateutil>=2.8.2->pandas<3,>=1.4.0->streamlit) (1.17.0)\n",
-      "Downloading streamlit-1.48.1-py3-none-any.whl (9.9 MB)\n",
-      "   ---------------------------------------- 0.0/9.9 MB ? eta -:--:--\n",
-      "   - -------------------------------------- 0.3/9.9 MB ? eta -:--:--\n",
-      "   --- ------------------------------------ 0.8/9.9 MB 2.6 MB/s eta 0:00:04\n",
-      "   ------ --------------------------------- 1.6/9.9 MB 2.6 MB/s eta 0:00:04\n",
-      "   --------- ------------------------------ 2.4/9.9 MB 2.9 MB/s eta 0:00:03\n",
-      "   ------------ --------------------------- 3.1/9.9 MB 3.2 MB/s eta 0:00:03\n",
-      "   ---------------- ----------------------- 4.2/9.9 MB 3.5 MB/s eta 0:00:02\n",
-      "   ------------------- -------------------- 4.7/9.9 MB 3.4 MB/s eta 0:00:02\n",
-      "   ------------------------ --------------- 6.0/9.9 MB 3.7 MB/s eta 0:00:02\n",
-      "   ----------------------------- ---------- 7.3/9.9 MB 4.0 MB/s eta 0:00:01\n",
-      "   --------------------------------- ------ 8.4/9.9 MB 4.2 MB/s eta 0:00:01\n",
-      "   ------------------------------------ --- 9.2/9.9 MB 4.0 MB/s eta 0:00:01\n",
-      "   ---------------------------------------- 9.9/9.9 MB 4.0 MB/s eta 0:00:00\n",
-      "Using cached altair-5.5.0-py3-none-any.whl (731 kB)\n",
-      "Using cached blinker-1.9.0-py3-none-any.whl (8.5 kB)\n",
-      "Downloading cachetools-6.1.0-py3-none-any.whl (11 kB)\n",
-      "Downloading click-8.2.1-py3-none-any.whl (102 kB)\n",
-      "Downloading gitpython-3.1.45-py3-none-any.whl (208 kB)\n",
-      "Using cached gitdb-4.0.12-py3-none-any.whl (62 kB)\n",
-      "Using cached pydeck-0.9.1-py2.py3-none-any.whl (6.9 MB)\n",
-      "Using cached smmap-5.0.2-py3-none-any.whl (24 kB)\n",
-      "Downloading tenacity-9.1.2-py3-none-any.whl (28 kB)\n",
-      "Using cached toml-0.10.2-py2.py3-none-any.whl (16 kB)\n",
-      "Using cached watchdog-6.0.0-py3-none-win_amd64.whl (79 kB)\n",
-      "Downloading narwhals-2.1.2-py3-none-any.whl (392 kB)\n",
-      "Downloading pyarrow-21.0.0-cp311-cp311-win_amd64.whl (26.2 MB)\n",
-      "   ---------------------------------------- 0.0/26.2 MB ? eta -:--:--\n",
-      "   - -------------------------------------- 1.0/26.2 MB 5.6 MB/s eta 0:00:05\n",
-      "   --- ------------------------------------ 2.1/26.2 MB 5.1 MB/s eta 0:00:05\n",
-      "   ----- ---------------------------------- 3.4/26.2 MB 5.4 MB/s eta 0:00:05\n",
-      "   ------ --------------------------------- 4.2/26.2 MB 5.2 MB/s eta 0:00:05\n",
-      "   -------- ------------------------------- 5.8/26.2 MB 5.4 MB/s eta 0:00:04\n",
-      "   ---------- ----------------------------- 7.1/26.2 MB 5.7 MB/s eta 0:00:04\n",
-      "   ------------- -------------------------- 8.9/26.2 MB 6.0 MB/s eta 0:00:03\n",
-      "   ---------------- ----------------------- 11.0/26.2 MB 6.3 MB/s eta 0:00:03\n",
-      "   ------------------- -------------------- 12.6/26.2 MB 6.5 MB/s eta 0:00:03\n",
-      "   ---------------------- ----------------- 14.7/26.2 MB 6.8 MB/s eta 0:00:02\n",
-      "   ------------------------ --------------- 16.3/26.2 MB 6.8 MB/s eta 0:00:02\n",
-      "   -------------------------- ------------- 17.3/26.2 MB 6.8 MB/s eta 0:00:02\n",
-      "   -------------------------- ------------- 17.6/26.2 MB 6.6 MB/s eta 0:00:02\n",
-      "   -------------------------- ------------- 17.6/26.2 MB 6.6 MB/s eta 0:00:02\n",
-      "   --------------------------- ------------ 17.8/26.2 MB 5.8 MB/s eta 0:00:02\n",
-      "   --------------------------- ------------ 18.1/26.2 MB 5.2 MB/s eta 0:00:02\n",
-      "   --------------------------- ------------ 18.4/26.2 MB 5.0 MB/s eta 0:00:02\n",
-      "   ---------------------------- ----------- 18.6/26.2 MB 4.8 MB/s eta 0:00:02\n",
-      "   ---------------------------- ----------- 18.9/26.2 MB 4.7 MB/s eta 0:00:02\n",
-      "   ----------------------------- ---------- 19.4/26.2 MB 4.5 MB/s eta 0:00:02\n",
-      "   ------------------------------ --------- 20.2/26.2 MB 4.4 MB/s eta 0:00:02\n",
-      "   ------------------------------- -------- 20.7/26.2 MB 4.4 MB/s eta 0:00:02\n",
-      "   --------------------------------- ------ 21.8/26.2 MB 4.4 MB/s eta 0:00:02\n",
-      "   ---------------------------------- ----- 22.8/26.2 MB 4.4 MB/s eta 0:00:01\n",
-      "   ----------------------------------- ---- 23.6/26.2 MB 4.4 MB/s eta 0:00:01\n",
-      "   ------------------------------------- -- 24.6/26.2 MB 4.4 MB/s eta 0:00:01\n",
-      "   -------------------------------------- - 25.4/26.2 MB 4.3 MB/s eta 0:00:01\n",
-      "   ---------------------------------------- 26.2/26.2 MB 4.3 MB/s eta 0:00:00\n",
-      "Installing collected packages: watchdog, toml, tenacity, smmap, pyarrow, narwhals, click, cachetools, blinker, pydeck, gitdb, gitpython, altair, streamlit\n",
-      "\n",
-      "   ----------------------------------------  0/14 [watchdog]\n",
-      "   ----------------------------------------  0/14 [watchdog]\n",
-      "   ----------------------------------------  0/14 [watchdog]\n",
-      "   ----------------------------------------  0/14 [watchdog]\n",
-      "   ----------------------------------------  0/14 [watchdog]\n",
-      "   -- -------------------------------------  1/14 [toml]\n",
-      "   ----- ----------------------------------  2/14 [tenacity]\n",
-      "   ----- ----------------------------------  2/14 [tenacity]\n",
-      "   -------- -------------------------------  3/14 [smmap]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   ----------- ----------------------------  4/14 [pyarrow]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   -------------- -------------------------  5/14 [narwhals]\n",
-      "   ----------------- ----------------------  6/14 [click]\n",
-      "   ----------------- ----------------------  6/14 [click]\n",
-      "   ----------------- ----------------------  6/14 [click]\n",
-      "   -------------------- -------------------  7/14 [cachetools]\n",
-      "   ------------------------- --------------  9/14 [pydeck]\n",
-      "   ------------------------- --------------  9/14 [pydeck]\n",
-      "   ------------------------- --------------  9/14 [pydeck]\n",
-      "   ------------------------- --------------  9/14 [pydeck]\n",
-      "   ------------------------- --------------  9/14 [pydeck]\n",
-      "   ---------------------------- ----------- 10/14 [gitdb]\n",
-      "   ---------------------------- ----------- 10/14 [gitdb]\n",
-      "   ---------------------------- ----------- 10/14 [gitdb]\n",
-      "   ---------------------------- ----------- 10/14 [gitdb]\n",
-      "   ------------------------------- -------- 11/14 [gitpython]\n",
-      "   ------------------------------- -------- 11/14 [gitpython]\n",
-      "   ------------------------------- -------- 11/14 [gitpython]\n",
-      "   ------------------------------- -------- 11/14 [gitpython]\n",
-      "   ------------------------------- -------- 11/14 [gitpython]\n",
-      "   ------------------------------- -------- 11/14 [gitpython]\n",
-      "   ------------------------------- -------- 11/14 [gitpython]\n",
-      "   ---------------------------------- ----- 12/14 [altair]\n",
-      "   ---------------------------------- ----- 12/14 [altair]\n",
-      "   ---------------------------------- ----- 12/14 [altair]\n",
-      "   ---------------------------------- ----- 12/14 [altair]\n",
-      "   ---------------------------------- ----- 12/14 [altair]\n",
-      "   ---------------------------------- ----- 12/14 [altair]\n",
-      "   ---------------------------------- ----- 12/14 [altair]\n",
-      "   ---------------------------------- ----- 12/14 [altair]\n",
-      "   ---------------------------------- ----- 12/14 [altair]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ------------------------------------- -- 13/14 [streamlit]\n",
-      "   ---------------------------------------- 14/14 [streamlit]\n",
-      "\n",
-      "Successfully installed altair-5.5.0 blinker-1.9.0 cachetools-6.1.0 click-8.2.1 gitdb-4.0.12 gitpython-3.1.45 narwhals-2.1.2 pyarrow-21.0.0 pydeck-0.9.1 smmap-5.0.2 streamlit-1.48.1 tenacity-9.1.2 toml-0.10.2 watchdog-6.0.0\n",
-      "Note: you may need to restart the kernel to use updated packages.\n"
-     ]
-    },
-    {
-     "name": "stderr",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "[notice] A new release of pip is available: 25.1.1 -> 25.2\n",
-      "[notice] To update, run: python.exe -m pip install --upgrade pip\n"
-     ]
-    }
-   ],
-   "source": [
-    "pip install streamlit"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 3,
-   "id": "04591e5b-61fd-47c8-82c6-e306396f167f",
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stderr",
-     "output_type": "stream",
-     "text": [
-      "2025-08-19 15:07:38.027 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:38.931 \n",
-      "  \u001b[33m\u001b[1mWarning:\u001b[0m to view this Streamlit app on a browser, run it with the following\n",
-      "  command:\n",
-      "\n",
-      "    streamlit run C:\\Users\\Anwesa Bharasa\\AppData\\Roaming\\Python\\Python311\\site-packages\\ipykernel_launcher.py [ARGUMENTS]\n",
-      "2025-08-19 15:07:38.932 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:38.933 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:38.935 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.438 Thread 'Thread-5': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.442 Thread 'Thread-5': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.443 Thread 'Thread-5': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.451 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.452 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.454 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.454 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.456 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.458 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.460 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.462 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.464 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.465 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.467 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.469 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.472 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.475 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.479 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.481 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.482 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n",
-      "2025-08-19 15:07:39.484 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.\n"
-     ]
-    }
-   ],
-   "source": [
-    "import streamlit as st\n",
-    "import tensorflow as tf\n",
-    "from PIL import Image\n",
-    "import numpy as np\n",
-    "import os\n",
-    "\n",
-    "# --- Load the model ---\n",
-    "# Use a caching decorator to load the model only once.\n",
-    "# This makes the app run much faster.\n",
-    "@st.cache_resource\n",
-    "def load_model():\n",
-    "    model = tf.keras.models.load_model('pneumonia_detection_model.keras')\n",
-    "    return model\n",
-    "\n",
-    "model = load_model()\n",
-    "\n",
-    "# Define the labels for the output\n",
-    "class_names = ['Normal', 'Pneumonia']\n",
-    "\n",
-    "# --- Set up the Streamlit app layout ---\n",
-    "st.title('Pneumonia Detection from Chest X-ray')\n",
-    "st.markdown('A deep learning application to classify chest X-ray images.')\n",
-    "\n",
-    "st.header('Upload an X-ray Image')\n",
-    "uploaded_file = st.file_uploader(\"Choose an image...\", type=[\"jpg\", \"jpeg\", \"png\"])\n",
-    "\n",
-    "if uploaded_file is not None:\n",
-    "    # Display the uploaded image\n",
-    "    image = Image.open(uploaded_file).convert('RGB')\n",
-    "    st.image(image, caption='Uploaded Image', use_column_width=True)\n",
-    "\n",
-    "    # Convert the image to a NumPy array for model prediction\n",
-    "    img_array = np.array(image)\n",
-    "    \n",
-    "    # Preprocess the image to match the model's input requirements\n",
-    "    img_array = tf.image.resize(img_array, (150, 150))\n",
-    "    img_array = np.expand_dims(img_array, axis=0) # Add a batch dimension\n",
-    "    img_array = img_array / 255.0 # Normalize pixel values\n",
-    "\n",
-    "    # Make a prediction\n",
-    "    prediction = model.predict(img_array)\n",
-    "    prediction_class = np.argmax(prediction) # Get the index of the predicted class\n",
-    "    confidence = np.max(prediction) # Get the confidence score\n",
-    "    \n",
-    "    # Display the prediction and confidence\n",
-    "    st.header('Prediction')\n",
-    "    if class_names[prediction_class] == 'Pneumonia':\n",
-    "        st.error(f'Prediction: {class_names[prediction_class]}')\n",
-    "        st.write(f'Confidence: {confidence:.2f}')\n",
-    "        st.markdown(\"⚠️ **Warning:** This prediction suggests the presence of pneumonia. A medical professional's diagnosis is required for confirmation.\")\n",
-    "    else:\n",
-    "        st.success(f'Prediction: {class_names[prediction_class]}')\n",
-    "        st.write(f'Confidence: {confidence:.2f}')\n",
-    "        st.markdown(\"✅ **Great!** This prediction suggests no sign of pneumonia. Always consult a medical professional for a definitive diagnosis.\")\n",
-    "\n",
-    "    st.markdown(\"---\")\n",
-    "    st.markdown(\"### How to interpret the results:\")\n",
-    "    st.markdown(\"- **Normal:** The model predicts no signs of pneumonia.\")\n",
-    "    st.markdown(\"- **Pneumonia:** The model predicts the presence of pneumonia.\")\n",
-    "    st.markdown(\"The confidence score indicates how certain the model is about its prediction. A score closer to 1.0 means higher certainty.\")"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "id": "04b8abba-728d-41b7-9f65-b2a5a2becc05",
-   "metadata": {},
-   "outputs": [],
-   "source": []
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python 3 (ipykernel)",
-   "language": "python",
-   "name": "python3"
-  },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 3
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython3",
-   "version": "3.11.0"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 5
-}
+import streamlit as st
+import tensorflow as tf
+from PIL import Image
+import numpy as np
+import os
+
+# --- Load the model ---
+# Use a caching decorator to load the model only once.
+# This makes the app run much faster.
+@st.cache_resource
+def load_model():
+    model = tf.keras.models.load_model('pneumonia_detection_model.keras')
+    return model
+
+model = load_model()
+
+# Define the labels for the output
+class_names = ['Normal', 'Pneumonia']
+
+# --- Set up the Streamlit app layout ---
+st.title('Pneumonia Detection from Chest X-ray')
+st.markdown('A deep learning application to classify chest X-ray images.')
+
+st.header('Upload an X-ray Image')
+uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+
+if uploaded_file is not None:
+    # Display the uploaded image
+    image = Image.open(uploaded_file).convert('RGB')
+    st.image(image, caption='Uploaded Image', use_column_width=True)
+
+    # Convert the image to a NumPy array for model prediction
+    img_array = np.array(image)
+
+    # Preprocess the image to match the model's input requirements
+    img_array = tf.image.resize(img_array, (150, 150))
+    img_array = np.expand_dims(img_array, axis=0) # Add a batch dimension
+    img_array = img_array / 255.0 # Normalize pixel values
+
+    # Make a prediction
+    prediction = model.predict(img_array)
+    prediction_class = np.argmax(prediction) # Get the index of the predicted class
+    confidence = np.max(prediction) # Get the confidence score
+
+    # Display the prediction and confidence
+    st.header('Prediction')
+    if class_names[prediction_class] == 'Pneumonia':
+        st.error(f'Prediction: {class_names[prediction_class]}')
+        st.write(f'Confidence: {confidence:.2f}')
+        st.markdown("⚠️ **Warning:** This prediction suggests the presence of pneumonia. A medical professional's diagnosis is required for confirmation.")
+    else:
+        st.success(f'Prediction: {class_names[prediction_class]}')
+        st.write(f'Confidence: {confidence:.2f}')
+        st.markdown("✅ **Great!** This prediction suggests no sign of pneumonia. Always consult a medical professional for a definitive diagnosis.")
+
+    st.markdown("---")
+    st.markdown("### How to interpret the results:")
+    st.markdown("- **Normal:** The model predicts no signs of pneumonia.")
+    st.markdown("- **Pneumonia:** The model predicts the presence of pneumonia.")
+    st.markdown("The confidence score indicates how certain the model is about its prediction. A score closer to 1.0 means higher certainty.")
